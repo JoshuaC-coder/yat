@@ -44,9 +44,10 @@ public class Yahtzee
 				YahtzeeScoreCard ysc2 = new YahtzeeScoreCard();
 		YahtzeePlayer player1 = new YahtzeePlayer();
 		YahtzeePlayer player2 = new YahtzeePlayer();
-		
-
+		int round = 1;
+		boolean first = false;
 		int firstRoll = 0;
+		String valueChosen = "";
 		int secondRoll = 0;
 		String playerOne = Prompt.getString("Player 1, please enter your first name");
 		
@@ -71,18 +72,79 @@ public class Yahtzee
 			if(firstRoll > secondRoll)
 			{			
 				System.out.println(playerOne + ", since your sum was higher, you'll roll first.");
+				first = true;
 			}
 			else
 			{
 				System.out.println(playerTwo + ", since your sum was higher, you'll roll first.");
+				first = false;
 			}
 		}while(firstRoll == secondRoll);
-		ysc.printCardHeader();
-		ysc.printPlayerScore(player1);
-		dc.rollDice();
-		dc.printDice();
-		ysc.numberScore(1,dc);
+		while (round <= 13)
+		{
+			ysc.printCardHeader();
+			ysc.printPlayerScore(player1);
+			ysc2.printPlayerScore(player2);
+			System.out.println("Round " + round + " of 13 rounds.");
+			if(first)
+			{
+				Prompt.getString(playerOne + ", it's your turn to play. Please hit enter to roll the dice");
+				dc.rollDice();
+				dc.printDice();
+				int turns = 0;
+				boolean quit = true;
+				while(turns < 2 && quit)
+				{
+					valueChosen = Prompt.getString("Which di(c)e would you like to keep? Enter"
+						+ " the values you'd like to 'hold' without spaces. For examples,"
+						+ " if you'd like to 'hold' die 1, 2, and 5, enter 125"
+						+ " (enter -1 if you'd like to end the turn)");
+					if(valueChosen.equals("-1"))
+					{
+						quit = false;
+												System.out.println("in");
 
+					}
+					else
+					{
+						dc.rollDice(valueChosen);
+						dc.printDice();
+					}
+					turns++;
+				}
+				first = false;
+			}
+			else
+			{
+				Prompt.getString(playerTwo + ", it's your turn to play. Please hit enter to roll the dice");
+				dc2.rollDice();
+				dc2.printDice();
+				int turns = 0;
+				boolean quit = true;
+				while(turns < 2 && quit)
+				{
+					valueChosen = Prompt.getString("Which di(c)e would you like to keep? Enter"
+						+ " the values you'd like to 'hold' without spaces. For examples,"
+						+ " if you'd like to 'hold' die 1, 2, and 5, enter 125"
+						+ " (enter -1 if you'd like to end the turn)");
+					if(valueChosen.equals("-1"))
+					{
+						quit = false;
+						System.out.println("in");
+					}
+					else
+					{
+						dc2.rollDice(valueChosen);
+						dc2.printDice();
+					}
+					turns++;
+				}
+				first = true;
+			}
+			round++;
+		}
+		//ysc.numberScore(1,dc);
+		
 		
 	}
 }

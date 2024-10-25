@@ -39,7 +39,17 @@ public class DiceGroup {
 	 *
 	 *	you complete
 	 */
-	public void rollDice(String rawHold) { }
+	public void rollDice(String rawHold) { 
+		int [] flagged = new int[rawHold.length()];
+		
+		for(int i = 0; i < rawHold.length(); i++)
+		{
+			flagged[i] = Integer.parseInt(rawHold.charAt(i) + "");
+			System.out.println(flagged[i]);
+		}
+		
+		
+		}
 	
 	/**	getters - you complete */
 	
