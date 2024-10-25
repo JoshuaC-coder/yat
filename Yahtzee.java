@@ -39,12 +39,20 @@ public class Yahtzee
 	public void namesAndFirstInput()
 	{
 		DiceGroup dc = new DiceGroup();
+		DiceGroup dc2 = new DiceGroup();
+		YahtzeeScoreCard ysc = new YahtzeeScoreCard();
+				YahtzeeScoreCard ysc2 = new YahtzeeScoreCard();
+		YahtzeePlayer player1 = new YahtzeePlayer();
+		YahtzeePlayer player2 = new YahtzeePlayer();
+		
+
 		int firstRoll = 0;
 		int secondRoll = 0;
 		String playerOne = Prompt.getString("Player 1, please enter your first name");
 		
 		String playerTwo = Prompt.getString("\nPlayer 2, please enter your first name");
-		
+		player1.setName(playerOne);
+		player2.setName(playerTwo);
 		do
 		{
 			Prompt.getString("Let's see who will go first. " + playerOne + " , please hit enter to roll the dice");
@@ -53,9 +61,9 @@ public class Yahtzee
 			firstRoll = dc.getTotal();
 			
 			Prompt.getString(playerTwo + " it's your turn. Please hit enter to roll the dice");
-			dc.rollDice();
-			dc.printDice();
-			secondRoll = dc.getTotal();
+			dc2.rollDice();
+			dc2.printDice();
+			secondRoll = dc2.getTotal();
 
 			System.out.println(playerOne + ", you rolled a sum of " + firstRoll + ", and " 
 				+ playerTwo + ", you rolled a sum of " + secondRoll);
@@ -68,7 +76,12 @@ public class Yahtzee
 			{
 				System.out.println(playerTwo + ", since your sum was higher, you'll roll first.");
 			}
-		}while(firstRoll != secondRoll);
+		}while(firstRoll == secondRoll);
+		ysc.printCardHeader();
+		ysc.printPlayerScore(player1);
+		dc.rollDice();
+		dc.printDice();
+		ysc.numberScore(1,dc);
 
 		
 	}

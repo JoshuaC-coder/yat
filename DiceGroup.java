@@ -15,10 +15,8 @@ public class DiceGroup {
 	
 	/*	you complete */
 	public DiceGroup() { 
-		die = new Dice[5]; 
-		
-		// intializes each value in peg to a different Peg object
-			for (int i = 0; i < die.length; i++) 
+		die = new Dice[NUM_DICE]; 
+					for (int i = 0; i < die.length; i++) 
 			{
 				die[i] = new Dice();
 			}
@@ -32,7 +30,7 @@ public class DiceGroup {
 				die[i].roll();
 			}
 		
-		}
+	}
 	
 	/**	Hold the dice in the rawHold and roll the rest.
 	 *	For example: If rawHold is "421", then hold die 1, 2, and 4, and
@@ -70,6 +68,11 @@ public class DiceGroup {
 			System.out.println();
 		}
 		System.out.println();
+	}
+	
+	public Dice getDie(int index)
+	{
+		return die[index];
 	}
 	
 	/**

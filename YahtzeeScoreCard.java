@@ -1,3 +1,13 @@
+public class YahtzeeScoreCard
+{
+	private int [] score;
+	private int counter;
+	
+	public YahtzeeScoreCard()
+	{
+		score = new int[14];
+		counter = 0;
+	}
 	/**
 	 *  Print the scorecard header
 	 */
@@ -13,6 +23,8 @@
 	/**
 	 *  Prints the player's score
 	 */
+	 
+	 
 	public void printPlayerScore(YahtzeePlayer player) {
 		System.out.printf("| %-12s |", player.getName());
 		for (int i = 1; i < 14; i++) {
@@ -33,7 +45,7 @@
 	 *  @param dg  The DiceGroup to score
 	 *  @return  true if change succeeded. Returns false if choice already taken.
 	 */
-	public boolean changeScore(int choice, DiceGroup dg) {}
+	public boolean changeScore(int choice, DiceGroup dg) {return false;}
 	
 	/**
 	 *  Change the scorecard for a number score 1 to 6
@@ -41,7 +53,17 @@
 	 *  @param choice The choice of the player 1 to 6
 	 *  @param dg  The DiceGroup to score
 	 */
-	public void numberScore(int choice, DiceGroup dg) {}
+	public void numberScore(int choice, DiceGroup dg) {
+		int total = 0;
+		for (int i = 0; i < 5; i++) {
+        int dieValue = dg.getDie(i).getValue();  
+
+        if (dieValue == choice) {
+            total += dieValue;
+        }
+    }
+	
+	}
 	
 	/**
 	 *	Updates the scorecard for Three Of A Kind choice.
@@ -61,3 +83,14 @@
 	public void chance(DiceGroup dg) {}
 	
 	public void yahtzeeScore(DiceGroup dg) {}
+	
+	public void setScore(int scoreIn)
+	{
+		score[counter] = scoreIn;
+		counter++;
+	}
+	public int getScore(int index)
+	{
+		return score[index];
+	}
+}
