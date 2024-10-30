@@ -81,15 +81,19 @@ public class Yahtzee
 				first = false;
 			}
 		}while(firstRoll == secondRoll);
+		boolean printed = true;
 		while (round <= 13)
 		{
-			ysc.printCardHeader();
-			ysc.printPlayerScore(player1);
-			ysc2.printPlayerScore(player2);
-				System.out.println("      \t\t  1    2    3    4    5    6    7    8    9   10   11   12   13");
 			if(first)
 			{
+				ysc.printCardHeader();
+				ysc.printPlayerScore(player1);
+				ysc2.printPlayerScore(player2);
+				if(printed)
+				{
 				System.out.println("Round " + round + " of 13 rounds.");
+				printed = false;
+				}
 				Prompt.getString(playerOne + ", it's your turn to play. Please hit enter to roll the dice");
 				dc.rollDice();
 				dc.printDice();
@@ -121,6 +125,10 @@ public class Yahtzee
 					turns++;
 				}
 				first = false;
+				ysc.printCardHeader();
+				ysc.printPlayerScore(player1);
+				ysc2.printPlayerScore(player2);
+				System.out.println("      \t\t  1    2    3    4    5    6    7    8    9   10   11   12   13");
 				choice = Prompt.getInt(playerOne +  ", now you need to make a choice. Pick a valid integer from the list above ", 1, 13);
 				if(choice >= 1 && choice <= 6)
 				{
@@ -154,10 +162,19 @@ public class Yahtzee
 				{
 					ysc.yahtzeeScore(dc);
 				}
+				
 			}
 			
 			else
 			{
+				ysc.printCardHeader();
+				ysc.printPlayerScore(player1);
+				ysc2.printPlayerScore(player2);				
+				if(printed)
+				{
+				System.out.println("Round " + round + " of 13 rounds.");
+				printed = false;
+			}
 				Prompt.getString(playerTwo + ", it's your turn to play. Please hit enter to roll the dice");
 				dc2.rollDice();
 				dc2.printDice();
@@ -189,6 +206,10 @@ public class Yahtzee
 					turns++;
 				}
 				first = true;
+				ysc.printCardHeader();
+				ysc.printPlayerScore(player1);
+				ysc2.printPlayerScore(player2);
+				System.out.println("      \t\t  1    2    3    4    5    6    7    8    9   10   11   12   13");
 				choice = Prompt.getInt(playerTwo + ", now you need to make a choice. Pick a valid integer from the list above ", 1, 13);
 				if(choice >= 1 && choice <= 6)
 				{
