@@ -133,6 +133,14 @@ public class Yahtzee
 				{
 					ysc.fourOfAKind(dc);
 				}
+				else if(choice == 9)
+				{
+					ysc.fullHouse(dc);
+				}
+				else if(choice == 10)
+				{
+					ysc.smallStraight(dc);
+				}
 				else if(choice == 12)
 				{
 					ysc.chance(dc);
@@ -189,6 +197,15 @@ public class Yahtzee
 				{
 					ysc2.fourOfAKind(dc2);
 				}
+				else if(choice == 9)
+				{
+					ysc2.fullHouse(dc2);
+				}
+				else if(choice == 10)
+				{
+					ysc2.smallStraight(dc2);
+				}
+	
 				else if(choice == 12)
 				{
 					ysc2.chance(dc2);

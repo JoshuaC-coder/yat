@@ -138,21 +138,47 @@ public class YahtzeeScoreCard
 			System.out.println("Counters at: " + i + " are: " + counters[i]);
 			if(counters[i] == 3)
 			{
-				for(int j = 0; i < counters.length; i++)
+									System.out.println(counters[i]);
+
+				for(int j = 0; j < counters.length; i++)
 				{
 					if(counters[j] == 2)
 					{
+											System.out.println(counters[j]);
+
 						valid = true;
-						total = 30
+						total = 30;
 					}
 				}
 			}
 		}
 		
-		//set the score
+		setScore(total, 9);
 		}
 	
-	public void smallStraight(DiceGroup dg) {}
+	public void smallStraight(DiceGroup dg) {
+		int [] counters = new int[7]; 
+		boolean valid = false;
+		int total = 0;
+		for(int i = 0; i < 5; i++)
+		{
+			 int dieValue = dg.getDie(i).getValue(); 
+			 System.out.println("Die value: " + dieValue); 
+			 counters[dieValue]++;
+		}
+		
+		if(counters[0] >= 1 && counters[1] >= 1 && counters[2] >= 1 && counters[3] >= 1)
+		{			
+			valid = true;
+			total = 30;
+		}			
+		else if(counters[1] >= 1 && counters[2] >= 1 && counters[3] >= 1 && counters[4] >= 1)
+		{
+			valid = true;
+			total = 30;
+		}
+		
+		}
 	
 	public void largeStraight(DiceGroup dg) {}
 	
