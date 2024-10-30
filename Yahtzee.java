@@ -47,6 +47,7 @@ public class Yahtzee
 		int round = 1;
 		boolean first = false;
 		int firstRoll = 0;
+		int counter = 0;
 		
 		String valueChosen = "";
 		int secondRoll = 0;
@@ -81,19 +82,19 @@ public class Yahtzee
 				first = false;
 			}
 		}while(firstRoll == secondRoll);
-		boolean printed = true;
 		while (round <= 13)
 		{
+			boolean printRound = true;
 			if(first)
 			{
 				ysc.printCardHeader();
 				ysc.printPlayerScore(player1);
 				ysc2.printPlayerScore(player2);
-				if(printed)
-				{
-				System.out.println("Round " + round + " of 13 rounds.");
-				printed = false;
-				}
+				if (printRound && counter % 2 == 0)
+        {
+            System.out.println("Round " + round + " of 13 rounds.");
+            printRound = false;  // Print round info only once
+        }
 				Prompt.getString(playerOne + ", it's your turn to play. Please hit enter to roll the dice");
 				dc.rollDice();
 				dc.printDice();
@@ -170,11 +171,11 @@ public class Yahtzee
 				ysc.printCardHeader();
 				ysc.printPlayerScore(player1);
 				ysc2.printPlayerScore(player2);				
-				if(printed)
-				{
-				System.out.println("Round " + round + " of 13 rounds.");
-				printed = false;
-			}
+				if (printRound  && counter % 2 == 0)
+        {
+            System.out.println("Round " + round + " of 13 rounds.");
+            printRound = false;  // Print round info only once
+        }
 				Prompt.getString(playerTwo + ", it's your turn to play. Please hit enter to roll the dice");
 				dc2.rollDice();
 				dc2.printDice();
@@ -246,6 +247,7 @@ public class Yahtzee
 			round++;
 
 			}
+			counter++;
 		}
 		
 		
