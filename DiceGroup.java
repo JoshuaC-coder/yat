@@ -27,6 +27,7 @@ public class DiceGroup {
 	public void rollDice() { 
 		for (int i = 0; i < die.length; i++) 
 			{
+				
 				die[i].roll();
 			}
 		
@@ -41,14 +42,40 @@ public class DiceGroup {
 	 */
 	public void rollDice(String rawHold) { 
 		int [] flagged = new int[rawHold.length()];
+		int number = 0;
 		
 		for(int i = 0; i < rawHold.length(); i++)
 		{
 			flagged[i] = Integer.parseInt(rawHold.charAt(i) + "");
-			System.out.println(flagged[i]);
 		}
 		
-		
+		boolean caught = true;
+		boolean valid = false;
+		for(int i = 0; i < die.length; i++)
+		{
+			for(int j = 0; j < rawHold.length(); j++)
+			{
+				System.out.println(flagged[j]);
+				System.out.println("Die at: " + (i + 1));
+				if(flagged[j] != (i + 1) && caught)
+				{
+					valid = true;
+				}
+				else if(flagged[j] == (i + 1))
+				{
+					flagged[j] = -1;
+					valid = false;
+					caught = false;
+				}
+				if(valid && j == rawHold.length() - 1)
+				{
+					System.out.println("in");
+					die[i].roll();
+				}
+			}
+			valid = false;
+			caught = true;
+		}
 		}
 	
 	/**	getters - you complete */

@@ -47,6 +47,7 @@ public class Yahtzee
 		int round = 1;
 		boolean first = false;
 		int firstRoll = 0;
+		
 		String valueChosen = "";
 		int secondRoll = 0;
 		String playerOne = Prompt.getString("Player 1, please enter your first name");
@@ -93,6 +94,7 @@ public class Yahtzee
 				dc.printDice();
 				int turns = 0;
 				boolean quit = true;
+				int choice = 0;
 				while(turns < 2 && quit)
 				{
 					valueChosen = Prompt.getString("Which di(c)e would you like to keep? Enter"
@@ -105,15 +107,42 @@ public class Yahtzee
 												System.out.println("in");
 
 					}
-					else
+					else if(valueChosen.length() > 0)
 					{
 						dc.rollDice(valueChosen);
+						dc.printDice();
+					}
+					else
+					{
+						dc.rollDice();
 						dc.printDice();
 					}
 					turns++;
 				}
 				first = false;
+				choice = Prompt.getInt(playerOne +  ", now you need to make a choice. Pick a valid integer from the list above ", 1, 13);
+				if(choice >= 1 && choice <= 6)
+				{
+					ysc.numberScore(choice ,dc);
+				}
+				else if(choice == 7)
+				{
+					ysc.threeOfAKind(dc);
+				}
+				else if(choice == 8)
+				{
+					ysc.fourOfAKind(dc);
+				}
+				else if(choice == 12)
+				{
+					ysc.chance(dc);
+				}
+				else if(choice == 13)
+				{
+					ysc.yahtzeeScore(dc);
+				}
 			}
+			
 			else
 			{
 				Prompt.getString(playerTwo + ", it's your turn to play. Please hit enter to roll the dice");
@@ -121,6 +150,8 @@ public class Yahtzee
 				dc2.printDice();
 				int turns = 0;
 				boolean quit = true;
+								int choice = 0;
+
 				while(turns < 2 && quit)
 				{
 					valueChosen = Prompt.getString("Which di(c)e would you like to keep? Enter"
@@ -132,18 +163,44 @@ public class Yahtzee
 						quit = false;
 						System.out.println("in");
 					}
-					else
+					else if(valueChosen.length() > 0)
 					{
 						dc2.rollDice(valueChosen);
+						dc2.printDice();
+					}
+					else
+					{
+						dc2.rollDice();
 						dc2.printDice();
 					}
 					turns++;
 				}
 				first = true;
+				choice = Prompt.getInt(playerTwo + ", now you need to make a choice. Pick a valid integer from the list above ", 1, 13);
+				if(choice >= 1 && choice <= 6)
+				{
+					ysc2.numberScore(choice ,dc2);
+				}
+				else if(choice == 7)
+				{
+					ysc2.threeOfAKind(dc2);
+				}
+				else if(choice == 8)
+				{
+					ysc2.fourOfAKind(dc2);
+				}
+				else if(choice == 12)
+				{
+					ysc2.chance(dc2);
+				}
+				else if(choice == 13)
+				{
+					ysc2.yahtzeeScore(dc2);
+				}
+
 			}
 			round++;
 		}
-		//ysc.numberScore(1,dc);
 		
 		
 	}

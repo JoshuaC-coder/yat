@@ -1,12 +1,10 @@
 public class YahtzeeScoreCard
 {
 	private int [] score;
-	private int counter;
 	
 	public YahtzeeScoreCard()
 	{
 		score = new int[14];
-		counter = 0;
 	}
 	/**
 	 *  Print the scorecard header
@@ -57,12 +55,13 @@ public class YahtzeeScoreCard
 		int total = 0;
 		for (int i = 0; i < 5; i++) {
         int dieValue = dg.getDie(i).getValue();  
-
+		//System.out.println("Die: " + dieValue);
         if (dieValue == choice) {
             total += dieValue;
         }
     }
-	
+		setScore(total, choice);
+		//System.out.println(total);
 	}
 	
 	/**
@@ -70,24 +69,131 @@ public class YahtzeeScoreCard
 	 *
 	 *	@param dg	The DiceGroup to score
 	 */	
-	public void threeOfAKind(DiceGroup dg) {}
+	public void threeOfAKind(DiceGroup dg) 
+	{
+		int [] counters = new int[7]; 
+		boolean valid = false;
+		int total = 0;
+		for(int i = 0; i < 5; i++)
+		{
+			 int dieValue = dg.getDie(i).getValue(); 
+			 System.out.println("Die value: " + dieValue); 
+			 counters[dieValue]++;
+		}
+		
+		for(int i = 0; i < counters.length; i++)
+		{
+			System.out.println("Counters at: " + i + " are: " + counters[i]);
+			if(counters[i] == 3)
+			{
+				valid = true;
+				total = (i) * 3;
+			}
+		}
+		
+		setScore(total, 7);
+		
+		
+	}
 	
-	public void fourOfAKind(DiceGroup dg) {}
+	public void fourOfAKind(DiceGroup dg) {
+		int [] counters = new int[7]; 
+		boolean valid = false;
+		int total = 0;
+		for(int i = 0; i < 5; i++)
+		{
+			 int dieValue = dg.getDie(i).getValue(); 
+			 System.out.println("Die value: " + dieValue); 
+			 counters[dieValue]++;
+		}
+		
+		for(int i = 0; i < counters.length; i++)
+		{
+			System.out.println("Counters at: " + i + " are: " + counters[i]);
+			if(counters[i] == 4)
+			{
+				valid = true;
+				total = (i) * 4;
+			}
+		}
+		
+		setScore(total, 8);
+		
+		
+		}
 	
-	public void fullHouse(DiceGroup dg) {}
+	public void fullHouse(DiceGroup dg) {
+		int [] counters = new int[7]; 
+		boolean valid = false;
+		int total = 0;
+		for(int i = 0; i < 5; i++)
+		{
+			 int dieValue = dg.getDie(i).getValue(); 
+			 System.out.println("Die value: " + dieValue); 
+			 counters[dieValue]++;
+		}
+		
+		for(int i = 0; i < counters.length; i++)
+		{
+			System.out.println("Counters at: " + i + " are: " + counters[i]);
+			if(counters[i] == 3)
+			{
+				for(int j = 0; i < counters.length; i++)
+				{
+					if(counters[j] == 2)
+					{
+						valid = true;
+						total = 30
+					}
+				}
+			}
+		}
+		
+		//set the score
+		}
 	
 	public void smallStraight(DiceGroup dg) {}
 	
 	public void largeStraight(DiceGroup dg) {}
 	
-	public void chance(DiceGroup dg) {}
+	public void chance(DiceGroup dg) {
+		int total = 0;
+		for(int i = 0; i < 5; i++)
+		{
+			 int dieValue = dg.getDie(i).getValue();
+			 total += dieValue; 
+		}
+		setScore(total, 12);
+	}
 	
-	public void yahtzeeScore(DiceGroup dg) {}
+	public void yahtzeeScore(DiceGroup dg) {
+		int [] counters = new int[7]; 
+		boolean valid = false;
+		int total = 0;
+		for(int i = 0; i < 5; i++)
+		{
+			 int dieValue = dg.getDie(i).getValue(); 
+			 System.out.println("Die value: " + dieValue); 
+			 counters[dieValue]++;
+		}
+		
+		for(int i = 0; i < counters.length; i++)
+		{
+			System.out.println("Counters at: " + i + " are: " + counters[i]);
+			if(counters[i] == 5)
+			{
+				valid = true;
+				total = 50;
+			}
+		}
+		
+		setScore(total, 13);
+		
+		}
 	
-	public void setScore(int scoreIn)
+	public void setScore(int scoreIn, int counter)
 	{
 		score[counter] = scoreIn;
-		counter++;
 	}
 	public int getScore(int index)
 	{
