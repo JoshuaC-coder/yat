@@ -72,13 +72,12 @@ public class YahtzeeScoreCard
 	public void threeOfAKind(DiceGroup dg) 
 	{
 		int [] counters = new int[7]; 
-		boolean valid = false;
 		int total = 0;
 		for(int i = 0; i < 5; i++)
 		{
 			 int dieValue = dg.getDie(i).getValue(); 
 			 System.out.println("Die value: " + dieValue); 
-			 counters[dieValue]++;
+			 counters[dieValue - 1]++;
 		}
 		
 		for(int i = 0; i < counters.length; i++)
@@ -86,8 +85,7 @@ public class YahtzeeScoreCard
 			System.out.println("Counters at: " + i + " are: " + counters[i]);
 			if(counters[i] == 3)
 			{
-				valid = true;
-				total = (i) * 3;
+				total = (i + 1) * 3;
 			}
 		}
 		
@@ -98,13 +96,12 @@ public class YahtzeeScoreCard
 	
 	public void fourOfAKind(DiceGroup dg) {
 		int [] counters = new int[7]; 
-		boolean valid = false;
 		int total = 0;
 		for(int i = 0; i < 5; i++)
 		{
 			 int dieValue = dg.getDie(i).getValue(); 
 			 System.out.println("Die value: " + dieValue); 
-			 counters[dieValue]++;
+			 counters[dieValue - 1]++;
 		}
 		
 		for(int i = 0; i < counters.length; i++)
@@ -112,25 +109,22 @@ public class YahtzeeScoreCard
 			System.out.println("Counters at: " + i + " are: " + counters[i]);
 			if(counters[i] == 4)
 			{
-				valid = true;
-				total = (i) * 4;
+				total = (i + 1) * 4;
 			}
 		}
 		
-		setScore(total, 8);
-		
+		setScore(total, 8);	
 		
 		}
 	
 	public void fullHouse(DiceGroup dg) {
 		int [] counters = new int[7]; 
-		boolean valid = false;
 		int total = 0;
 		for(int i = 0; i < 5; i++)
 		{
 			 int dieValue = dg.getDie(i).getValue(); 
 			 System.out.println("Die value: " + dieValue); 
-			 counters[dieValue]++;
+			 counters[dieValue - 1]++;
 		}
 		
 		for(int i = 0; i < counters.length; i++)
@@ -140,13 +134,12 @@ public class YahtzeeScoreCard
 			{
 									System.out.println(counters[i]);
 
-				for(int j = 0; j < counters.length; i++)
+				for(int j = 0; j < counters.length; j++)
 				{
 					if(counters[j] == 2)
 					{
-											System.out.println(counters[j]);
+											System.out.println("full house");
 
-						valid = true;
 						total = 30;
 					}
 				}
@@ -158,29 +151,54 @@ public class YahtzeeScoreCard
 	
 	public void smallStraight(DiceGroup dg) {
 		int [] counters = new int[7]; 
-		boolean valid = false;
 		int total = 0;
 		for(int i = 0; i < 5; i++)
 		{
 			 int dieValue = dg.getDie(i).getValue(); 
 			 System.out.println("Die value: " + dieValue); 
-			 counters[dieValue]++;
+			 counters[dieValue - 1]++;
+			 System.out.println("Counters at: " + i + " are: " + counters[i]);
 		}
 		
 		if(counters[0] >= 1 && counters[1] >= 1 && counters[2] >= 1 && counters[3] >= 1)
 		{			
-			valid = true;
 			total = 30;
 		}			
 		else if(counters[1] >= 1 && counters[2] >= 1 && counters[3] >= 1 && counters[4] >= 1)
 		{
-			valid = true;
 			total = 30;
 		}
-		
+		else if(counters[2] >= 1 && counters[3] >= 1 && counters[4] >= 1 && counters[5] >= 1)
+		{
+			total = 30;
+		}
+		setScore(total, 10);
 		}
 	
-	public void largeStraight(DiceGroup dg) {}
+	public void largeStraight(DiceGroup dg) {
+		
+		int [] counters = new int[7]; 
+		int total = 0;
+		for(int i = 0; i < 5; i++)
+		{
+			 int dieValue = dg.getDie(i).getValue(); 
+			 System.out.println("Die value: " + dieValue); 
+			 counters[dieValue - 1]++;
+			 System.out.println("Counters at: " + i + " are: " + counters[i]);
+		}
+		
+		if(counters[0] >= 1 && counters[1] >= 1 && counters[2] >= 1 && counters[3] >= 1
+		   && counters[4] >= 1)
+		{			
+			total = 40;
+		}			
+		else if(counters[1] >= 1 && counters[2] >= 1 && counters[3] >= 1 && counters[4] >= 1
+		        && counters[5] >= 1)
+		{
+			total = 40;
+		}
+		setScore(total, 11);			
+		}
 	
 	public void chance(DiceGroup dg) {
 		int total = 0;
@@ -194,7 +212,6 @@ public class YahtzeeScoreCard
 	
 	public void yahtzeeScore(DiceGroup dg) {
 		int [] counters = new int[7]; 
-		boolean valid = false;
 		int total = 0;
 		for(int i = 0; i < 5; i++)
 		{
@@ -208,7 +225,6 @@ public class YahtzeeScoreCard
 			System.out.println("Counters at: " + i + " are: " + counters[i]);
 			if(counters[i] == 5)
 			{
-				valid = true;
 				total = 50;
 			}
 		}

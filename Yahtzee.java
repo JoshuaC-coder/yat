@@ -86,9 +86,10 @@ public class Yahtzee
 			ysc.printCardHeader();
 			ysc.printPlayerScore(player1);
 			ysc2.printPlayerScore(player2);
-			System.out.println("Round " + round + " of 13 rounds.");
+				System.out.println("      \t\t  1    2    3    4    5    6    7    8    9   10   11   12   13");
 			if(first)
 			{
+				System.out.println("Round " + round + " of 13 rounds.");
 				Prompt.getString(playerOne + ", it's your turn to play. Please hit enter to roll the dice");
 				dc.rollDice();
 				dc.printDice();
@@ -140,6 +141,10 @@ public class Yahtzee
 				else if(choice == 10)
 				{
 					ysc.smallStraight(dc);
+				}
+				else if(choice == 11)
+				{
+					ysc.largeStraight(dc);
 				}
 				else if(choice == 12)
 				{
@@ -205,7 +210,10 @@ public class Yahtzee
 				{
 					ysc2.smallStraight(dc2);
 				}
-	
+				else if(choice == 11)
+				{
+					ysc2.largeStraight(dc2);
+				}
 				else if(choice == 12)
 				{
 					ysc2.chance(dc2);
@@ -214,9 +222,9 @@ public class Yahtzee
 				{
 					ysc2.yahtzeeScore(dc2);
 				}
+			round++;
 
 			}
-			round++;
 		}
 		
 		
