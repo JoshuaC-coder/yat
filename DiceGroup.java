@@ -1,3 +1,14 @@
+/**
+ *	DiceGroup.java
+ *
+ *	This class deals with all the random dice rolling, holding of certain
+ *  dice, printing of the dice each time they are rolled (if needed), and
+ *  calculating totaling value of the dice.
+ *
+ *	@author	 Joshua Cao
+ *	@since   10/23/2024
+ */ 
+
 public class DiceGroup {
 	
 	private Dice [] die;	// the array of dice
@@ -14,23 +25,24 @@ public class DiceGroup {
 								"|_______|" };
 	
 	/*	you complete */
-	public DiceGroup() { 
+	public DiceGroup() 
+	{ 
 		die = new Dice[NUM_DICE]; 
-					for (int i = 0; i < die.length; i++) 
-			{
-				die[i] = new Dice();
-			}
-		}
-		
-	
-	/**	you complete */
-	public void rollDice() { 
 		for (int i = 0; i < die.length; i++) 
-			{
-				
-				die[i].roll();
-			}
-		
+		{
+			die[i] = new Dice();
+		}
+	}
+			
+	/**
+	 * Rolls each dice in the Die array once
+	 */
+	public void rollDice() 
+	{ 
+		for (int i = 0; i < die.length; i++) 
+		{	
+			die[i].roll();
+		}
 	}
 	
 	/**	Hold the dice in the rawHold and roll the rest.
@@ -41,32 +53,37 @@ public class DiceGroup {
 	 *	you complete
 	 */
 	public void rollDice(String rawHold) { 
-		int [] flagged = new int[rawHold.length()];
-		int number = 0;
-		
+		int [] flagged = new int[rawHold.length()]; // dice # the user picked
+		boolean caught = true;   // ensures a reroll only occurs once at the dice # 
+		boolean valid = false;   // if current dice # needs a roll   
+		 
+		// Stores each dice # user typed into an array
 		for(int i = 0; i < rawHold.length(); i++)
 		{
 			flagged[i] = Integer.parseInt(rawHold.charAt(i) + "");
 		}
 		
-		boolean caught = true;
-		boolean valid = false;
+		// Loops and checks through each die 
 		for(int i = 0; i < die.length; i++)
 		{
+			// Loops through the flagged indexes to be saved
 			for(int j = 0; j < rawHold.length(); j++)
 			{
-				System.out.println(flagged[j]);
-				System.out.println("Die at: " + (i + 1));
+				// If the die should be rolled
 				if(flagged[j] != (i + 1) && caught)
 				{
 					valid = true;
 				}
+				
+				// If the die should be skipped
 				else if(flagged[j] == (i + 1))
 				{
 					flagged[j] = -1;
 					valid = false;
 					caught = false;
 				}
+				
+				// Roll if the die should be rolled
 				if(valid && j == rawHold.length() - 1)
 				{
 					System.out.println("in");
@@ -76,13 +93,16 @@ public class DiceGroup {
 			valid = false;
 			caught = true;
 		}
-		}
+	}
 	
-	/**	getters - you complete */
 	
-	/**	@return the total value of the DiceGroup - you complete */
+	/**	
+	 * Gets each value of each diee in the Die array and add them up
+	 * 	
+	 * @return the total value of the DiceGroup - you complete 
+	 */
 	public int getTotal() { 
-		int total = 0;
+		int total = 0; // total value of all five dice
 		for (int i = 0; i < die.length; i++) 
 		{
 			total += die[i].getValue();
